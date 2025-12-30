@@ -16,6 +16,8 @@ import { UploadResourceComponent } from './components/upload-resource/upload-res
 import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
 import { ProfessorDashboardComponent } from './components/professor-dashboard/professor-dashboard.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { TakeQuizComponent } from './components/take-quiz/take-quiz.component';
+import { CreateQuizComponent } from './components/create-quiz/create-quiz.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
     UploadResourceComponent,
     StudentDashboardComponent,
     ProfessorDashboardComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    TakeQuizComponent,
+    CreateQuizComponent
   ],
   imports: [
     BrowserModule,

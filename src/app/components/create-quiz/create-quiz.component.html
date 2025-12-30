@@ -1,0 +1,199 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="mb-4">Create a New Quiz</h1>
+
+      <!-- Success Message -->
+      <div *ngIf="success" class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> <strong>Success!</strong> Quiz created successfully!
+        <button type="button" class="btn-close" (click)="success = false" aria-label="Close"></button>
+        <div class="mt-2">
+          <button class="btn btn-sm btn-primary me-2" (click)="openTakeQuiz()">
+            <i class="fas fa-play"></i> Open Quiz
+          </button>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-circle"></i> <strong>Error:</strong> {{ error }}
+        <button type="button" class="btn-close" (click)="error = null" aria-label="Close"></button>
+      </div>
+
+      <!-- Quiz Form -->
+      <form [formGroup]="quizForm" (ngSubmit)="createQuiz()" class="card">
+        <div class="card-body">
+          <!-- Title -->
+          <div class="mb-3">
+            <label for="title" class="form-label">Quiz Title</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="title"
+              formControlName="title"
+              placeholder="e.g., Chapter 5 - Circuits Analysis"
+              [class.is-invalid]="quizForm.get('title')?.invalid && quizForm.get('title')?.touched"
+            >
+            <div class="invalid-feedback d-block" *ngIf="quizForm.get('title')?.invalid && quizForm.get('title')?.touched">
+              <small>Title is required and must be at least 5 characters</small>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea 
+              class="form-control" 
+              id="description"
+              formControlName="description"
+              rows="3"
+              placeholder="Describe what this quiz covers..."
+              [class.is-invalid]="quizForm.get('description')?.invalid && quizForm.get('description')?.touched"
+            ></textarea>
+            <div class="invalid-feedback d-block" *ngIf="quizForm.get('description')?.invalid && quizForm.get('description')?.touched">
+              <small>Description is required and must be at least 10 characters</small>
+            </div>
+          </div>
+
+          <!-- Academic Selection -->
+          <div class="row">
+            <!-- Year -->
+            <div class="col-md-4 mb-3">
+              <label for="year" class="form-label">Semester</label>
+              <select 
+                class="form-select" 
+                id="year"
+                formControlName="year"
+                (change)="onYearChange()"
+                [class.is-invalid]="quizForm.get('year')?.invalid && quizForm.get('year')?.touched"
+              >
+                <option value="">Select Semester</option>
+                <option *ngFor="let year of years" [value]="year.id">{{ year.name }}</option>
+              </select>
+              <div class="invalid-feedback d-block" *ngIf="quizForm.get('year')?.invalid && quizForm.get('year')?.touched">
+                <small>Please select a semester</small>
+              </div>
+            </div>
+
+            <!-- Module -->
+            <div class="col-md-4 mb-3">
+              <label for="module" class="form-label">Module</label>
+              <select 
+                class="form-select" 
+                id="module"
+                formControlName="module"
+                (change)="onModuleChange()"
+                [disabled]="modules.length === 0"
+                [class.is-invalid]="quizForm.get('module')?.invalid && quizForm.get('module')?.touched"
+              >
+                <option value="">Select Module</option>
+                <option *ngFor="let module of modules" [value]="module.id">{{ module.name }}</option>
+              </select>
+              <div class="invalid-feedback d-block" *ngIf="quizForm.get('module')?.invalid && quizForm.get('module')?.touched">
+                <small>Please select a module</small>
+              </div>
+            </div>
+
+            <!-- Subject -->
+            <div class="col-md-4 mb-3">
+              <label for="subject" class="form-label">Subject</label>
+              <select 
+                class="form-select" 
+                id="subject"
+                formControlName="subject"
+                [disabled]="subjects.length === 0"
+                [class.is-invalid]="quizForm.get('subject')?.invalid && quizForm.get('subject')?.touched"
+              >
+                <option value="">Select Subject</option>
+                <option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</option>
+              </select>
+              <div class="invalid-feedback d-block" *ngIf="quizForm.get('subject')?.invalid && quizForm.get('subject')?.touched">
+                <small>Please select a subject</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Duration and Passing Score -->
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="duration" class="form-label">Duration (minutes)</label>
+              <input 
+                type="number" 
+                class="form-control" 
+                id="duration"
+                formControlName="durationMinutes"
+                min="5"
+                max="180"
+                [class.is-invalid]="quizForm.get('durationMinutes')?.invalid && quizForm.get('durationMinutes')?.touched"
+              >
+              <div class="invalid-feedback d-block" *ngIf="quizForm.get('durationMinutes')?.invalid && quizForm.get('durationMinutes')?.touched">
+                <small>Duration must be between 5 and 180 minutes</small>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="passingScore" class="form-label">Passing Score (%)</label>
+              <input 
+                type="number" 
+                class="form-control" 
+                id="passingScore"
+                formControlName="passingScore"
+                min="0"
+                max="100"
+                [class.is-invalid]="quizForm.get('passingScore')?.invalid && quizForm.get('passingScore')?.touched"
+              >
+              <div class="invalid-feedback d-block" *ngIf="quizForm.get('passingScore')?.invalid && quizForm.get('passingScore')?.touched">
+                <small>Passing score must be between 0 and 100</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Google Form URL -->
+          <div class="mb-3">
+            <label for="googleFormUrl" class="form-label">Google Form URL</label>
+            <div class="input-group">
+              <input 
+                type="url" 
+                class="form-control" 
+                id="googleFormUrl"
+                formControlName="googleFormUrl"
+                placeholder="Paste your Google Form link here"
+                [class.is-invalid]="quizForm.get('googleFormUrl')?.invalid && quizForm.get('googleFormUrl')?.touched"
+              >
+              <button 
+                class="btn btn-outline-secondary" 
+                type="button"
+                (click)="openGoogleForms()"
+              >
+                <i class="fas fa-external-link-alt"></i> Create Form
+              </button>
+            </div>
+            <small class="form-text text-muted d-block mt-2">
+              <i class="fas fa-info-circle"></i> 
+              Click "Create Form" to open Google Forms in a new window. Create your quiz there, then copy the form link and paste it above.
+            </small>
+            <div class="invalid-feedback d-block" *ngIf="quizForm.get('googleFormUrl')?.invalid && quizForm.get('googleFormUrl')?.touched">
+              <small>Please provide a valid Google Form URL</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer bg-light">
+          <button 
+            type="submit" 
+            class="btn btn-primary btn-lg"
+            [disabled]="loading || quizForm.invalid"
+          >
+            <span *ngIf="!loading">
+              <i class="fas fa-save"></i> Create Quiz
+            </span>
+            <span *ngIf="loading">
+              <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              Creating...
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

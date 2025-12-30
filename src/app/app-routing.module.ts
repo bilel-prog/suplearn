@@ -9,6 +9,8 @@ import { UploadResourceComponent } from './components/upload-resource/upload-res
 import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
 import { ProfessorDashboardComponent } from './components/professor-dashboard/professor-dashboard.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { TakeQuizComponent } from './components/take-quiz/take-quiz.component';
+import { CreateQuizComponent } from './components/create-quiz/create-quiz.component';
 import { AuthGuard } from './guards/auth.guard';
 import { StudentGuard } from './guards/student.guard';
 import { ProfessorGuard } from './guards/professor.guard';
@@ -21,6 +23,13 @@ const routes: Routes = [
   { path: 'resources', component: ResourceListComponent },
   { path: 'resources/:id', component: ResourceDetailComponent },
   { path: 'upload', component: UploadResourceComponent },
+  { path: 'take-quiz', component: TakeQuizComponent },
+  { path: 'take-quiz/:id', component: TakeQuizComponent },
+  { 
+    path: 'create-quiz', 
+    component: CreateQuizComponent,
+    canActivate: [AuthGuard, ProfessorGuard]
+  },
   { 
     path: 'student/dashboard', 
     component: StudentDashboardComponent,

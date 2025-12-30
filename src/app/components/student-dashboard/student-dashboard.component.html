@@ -45,8 +45,61 @@
         </div>
         <div class="card-body">
           <a routerLink="/resources" class="btn btn-primary mb-2 w-100">Browse Resources</a>
+          <a routerLink="/take-quiz" class="btn btn-warning mb-2 w-100">Take a Quiz</a>
           <a routerLink="/upload" class="btn btn-secondary mb-2 w-100">Upload Resource</a>
           <button class="btn btn-info w-100">Create Schedule</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Available Quizzes</h5>
+        </div>
+        <div class="card-body">
+          <div *ngIf="availableQuizzes.length === 0" class="text-muted">
+            <small>No quizzes available</small>
+          </div>
+          <div *ngFor="let quiz of availableQuizzes" class="mb-2">
+            <div class="d-flex justify-content-between align-items-center">
+              <small>
+                <strong>{{ quiz.title }}</strong><br>
+                <span class="text-muted">{{ quiz.durationMinutes }}min | Pass: {{ quiz.passingScore }}%</span>
+              </small>
+              <button class="btn btn-sm btn-success" (click)="takeQuiz(quiz.id!)">
+                <i class="fas fa-play"></i>
+              </button>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upcoming Schedules Section -->
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Upcoming Study Sessions</h5>
+        </div>
+        <div class="card-body">
+          <div *ngIf="upcomingSchedules.length === 0" class="text-muted">
+            <small>No scheduled sessions</small>
+          </div>
+          <div *ngFor="let schedule of upcomingSchedules" class="mb-2">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <strong>{{ schedule.title }}</strong><br>
+                <small class="text-muted">
+                  {{ schedule.scheduledDate | date:'short' }}<br>
+                  {{ schedule.durationMinutes }} minutes
+                </small>
+              </div>
+            </div>
+            <hr>
+          </div>
         </div>
       </div>
     </div>
@@ -56,7 +109,16 @@
           <h5>Recent Activity</h5>
         </div>
         <div class="card-body">
-          <p class="text-muted">No recent activity</p>
+          <div *ngIf="recentActivities.length === 0" class="text-muted">
+            <small>No recent activity</small>
+          </div>
+          <div *ngFor="let activity of recentActivities.slice(0, 5)" class="mb-2">
+            <small>
+              <strong>{{ activity.activityType }}</strong><br>
+              {{ activity.activityDate | date:'short' }}
+            </small>
+            <hr>
+          </div>
         </div>
       </div>
     </div>

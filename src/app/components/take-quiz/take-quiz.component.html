@@ -1,0 +1,115 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="mb-4">Take a Quiz</h1>
+
+      <!-- Error Message -->
+      <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error:</strong> {{ error }}
+        <button type="button" class="btn-close" (click)="error = null" aria-label="Close"></button>
+      </div>
+
+      <!-- Loading Spinner -->
+      <div *ngIf="loading" class="text-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2">Loading quizzes...</p>
+      </div>
+
+      <!-- Quiz View (Single Quiz) -->
+      <div *ngIf="quiz && !loading" class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">{{ quiz.title }}</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{ quiz.description }}</p>
+          
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <small class="text-muted">
+                <strong>Duration:</strong> {{ quiz.durationMinutes }} minutes
+              </small>
+            </div>
+            <div class="col-md-6">
+              <small class="text-muted">
+                <strong>Passing Score:</strong> {{ quiz.passingScore }}%
+              </small>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="d-flex gap-2">
+            <button 
+              class="btn btn-success btn-lg" 
+              (click)="takeQuiz(quiz)"
+              [disabled]="!quiz.googleFormUrl"
+            >
+              <i class="fas fa-play"></i> Start Quiz
+            </button>
+            <button 
+              *ngIf="quizzes.length > 0"
+              class="btn btn-secondary btn-lg" 
+              (click)="goBack()"
+            >
+              <i class="fas fa-arrow-left"></i> Back to List
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quiz List (All Quizzes) -->
+      <div *ngIf="!quiz && !loading" class="row">
+        <div *ngIf="quizzes.length === 0" class="col-12">
+          <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> No quizzes available at the moment.
+          </div>
+        </div>
+
+        <div *ngFor="let q of quizzes" class="col-md-6 mb-4">
+          <div class="card h-100 quiz-card">
+            <div class="card-body">
+              <h5 class="card-title">{{ q.title }}</h5>
+              <p class="card-text text-muted">{{ q.description }}</p>
+
+              <div class="quiz-meta mb-3">
+                <small class="text-muted d-block">
+                  <i class="fas fa-clock"></i> {{ q.durationMinutes }} mins
+                </small>
+                <small class="text-muted d-block">
+                  <i class="fas fa-check-circle"></i> Pass: {{ q.passingScore }}%
+                </small>
+              </div>
+
+              <button 
+                class="btn btn-primary w-100" 
+                (click)="selectQuiz(q.id!)"
+              >
+                <i class="fas fa-eye"></i> View & Take
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.quiz-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #e0e0e0;
+}
+
+.quiz-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.quiz-meta {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+}
+</style>

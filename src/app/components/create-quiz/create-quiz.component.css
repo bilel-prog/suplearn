@@ -1,0 +1,72 @@
+.form-container {
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.form-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.form-control, .form-select {
+  border: 1px solid #ddd;
+  padding: 10px 12px;
+  border-radius: 4px;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.card {
+  border: 1px solid #dee2e6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 30px;
+}
+
+.card-footer {
+  padding: 20px 30px;
+  border-top: 1px solid #dee2e6;
+}
+
+.btn-lg {
+  padding: 12px 30px;
+  font-size: 16px;
+}
+
+.input-group .btn {
+  border-color: #ddd;
+}
+
+.input-group .btn:hover {
+  background-color: #f8f9fa;
+}
+
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+}
+
+.alert {
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+small.form-text {
+  display: block;
+  margin-top: 8px;
+  color: #6c757d;
+}
