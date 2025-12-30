@@ -1,0 +1,12 @@
+.btn-outline-dark:hover {
+  background-color: #f0f0f0;
+  border-color: #212529;
+}
+
+.btn-outline-dark i {
+  font-size: 1.1em;
+}
+
+hr {
+  margin: 0;
+}

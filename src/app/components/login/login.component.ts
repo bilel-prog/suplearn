@@ -60,4 +60,22 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+  loginWithGoogle(): void {
+    window.location.href = 'https://accounts.google.com/o/oauth2/v2/auth?client_id=YOUR_GOOGLE_CLIENT_ID&redirect_uri=' + 
+      encodeURIComponent(window.location.origin + '/auth/google') + 
+      '&response_type=code&scope=openid%20profile%20email';
+  }
+
+  loginWithMicrosoft(): void {
+    window.location.href = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=YOUR_MICROSOFT_CLIENT_ID&redirect_uri=' + 
+      encodeURIComponent(window.location.origin + '/auth/microsoft') + 
+      '&response_type=code&scope=openid%20profile%20email';
+  }
+
+  loginWithApple(): void {
+    window.location.href = 'https://appleid.apple.com/auth/authorize?client_id=YOUR_APPLE_CLIENT_ID&redirect_uri=' + 
+      encodeURIComponent(window.location.origin + '/auth/apple') + 
+      '&response_type=code&scope=openid%20profile%20email&response_mode=query';
+  }
 }

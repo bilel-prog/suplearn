@@ -37,7 +37,30 @@
               Login
             </button>
           </form>
-          <div class="text-center mt-3">
+
+          <!-- OAuth Divider -->
+          <div class="my-4">
+            <div class="d-flex align-items-center">
+              <hr class="flex-grow-1">
+              <span class="mx-2 text-muted">Or continue with</span>
+              <hr class="flex-grow-1">
+            </div>
+          </div>
+
+          <!-- OAuth Buttons -->
+          <div class="d-grid gap-2">
+            <button type="button" class="btn btn-outline-dark" (click)="loginWithGoogle()">
+              <i class="fab fa-google me-2"></i> Google
+            </button>
+            <button type="button" class="btn btn-outline-dark" (click)="loginWithMicrosoft()">
+              <i class="fab fa-microsoft me-2"></i> Microsoft
+            </button>
+            <button type="button" class="btn btn-outline-dark" (click)="loginWithApple()">
+              <i class="fab fa-apple me-2"></i> Apple
+            </button>
+          </div>
+
+          <div class="text-center mt-4">
             <p>Don't have an account? <a routerLink="/register">Register here</a></p>
           </div>
         </div>
