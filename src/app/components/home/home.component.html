@@ -1,0 +1,85 @@
+<div class="container">
+  <!-- Hero Section -->
+  <div class="jumbotron bg-primary text-white p-5 rounded mb-4">
+    <h1 class="display-4">Welcome to Sup'Learn</h1>
+    <p class="lead">Your comprehensive academic resource hub for engineering students</p>
+    <hr class="my-4 bg-white">
+    <p>Access courses, old exams, projects, and coursework shared by students and professors</p>
+    <div class="mt-4">
+      <a class="btn btn-light btn-lg me-2" routerLink="/resources" role="button">Browse Resources</a>
+      <a class="btn btn-outline-light btn-lg" routerLink="/upload" role="button">Upload Resources</a>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <h3>📚</h3>
+          <h5 class="card-title">Browse Resources</h5>
+          <p class="card-text">Access thousands of academic resources organized by year, module, and subject</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <h3>📝</h3>
+          <h5 class="card-title">Take Quizzes</h5>
+          <p class="card-text">Test your knowledge with quizzes and track your progress</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <h3>📅</h3>
+          <h5 class="card-title">Plan Your Study</h5>
+          <p class="card-text">Create revision schedules and sync with your calendar</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Section -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h3 class="card-title">Search Resources</h3>
+      <div class="input-group">
+        <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Search for courses, exams, projects..." 
+          [(ngModel)]="searchKeyword"
+          (keyup.enter)="search()">
+        <button class="btn btn-primary" type="button" (click)="search()">
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popular Resources -->
+  <div class="row">
+    <div class="col-12">
+      <h3>Popular Resources</h3>
+      <div class="row">
+        <div class="col-md-6" *ngFor="let resource of popularResources">
+          <div class="card mb-3 resource-card">
+            <div class="card-body">
+              <h5 class="card-title">{{ resource.title }}</h5>
+              <p class="card-text">{{ resource.description }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-primary">{{ resource.type }}</span>
+                <span class="text-muted">
+                  <small>👁️ {{ resource.viewCount }} | ⬇️ {{ resource.downloadCount }}</small>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

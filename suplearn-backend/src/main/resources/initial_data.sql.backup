@@ -1,0 +1,169 @@
+-- Sup'Learn Initial Data Setup Script
+-- Run this after the application creates the database schema
+
+USE suplearn_db_clean;
+
+-- Insert Years (Semesters)
+INSERT INTO years (name, year_number, description) VALUES
+('Semestre 1 (TC S1)', 1, 'First semester'),
+('Semestre 2 (TC S2)', 2, 'Second semester'),
+('Semestre 3 (TC S3)', 3, 'Third semester'),
+('Semestre 4 (TC S4)', 4, 'Fourth semester');
+
+-- Modules for Semestre 1
+INSERT INTO modules (name, description, code, year_id) VALUES
+('ELC01-01 · Circuits et Systèmes électroniques et hyperfréquences', 'Electronics and RF systems', 'ELC01', 1),
+('INF01-01 · Algorithmique et programmation', 'Algorithms and programming', 'INF01', 1),
+('RES01-01 · Fondements des réseaux', 'Network fundamentals', 'RES01', 1),
+('MDI01-01 · Mathématiques et Probabilités', 'Mathematics and probabilities', 'MDI01', 1),
+('SCS01-01 · Entreprenariat : Management des affaires', 'Business management', 'SCS01', 1),
+('LCG01-01 · Techniques de Communications', 'Communication techniques', 'LCG01', 1);
+
+-- Modules for Semestre 2
+INSERT INTO modules (name, description, code, year_id) VALUES
+('ELC02-01 · Technologies de traitement embarqué de l''information', 'Embedded systems', 'ELC02', 2),
+('INF02-01 · Bases de données et système', 'Databases and systems', 'INF02', 2),
+('RES02-01 · Réseaux IP', 'IP Networks', 'RES02', 2),
+('MDI02-01 · Optimisation et Signal', 'Optimization and signal', 'MDI02', 2),
+('SCS02-01 · Management et projets sociétaux', 'Project management', 'SCS02', 2),
+('LCG02-01 · Techniques de communications', 'Communication techniques', 'LCG02', 2);
+
+-- Modules for Semestre 3
+INSERT INTO modules (name, description, code, year_id) VALUES
+('ELC03-01 · Systèmes de communication haut-débit', 'High-speed communication systems', 'ELC03', 3),
+('INF03-01 · Conception et Développement avancés', 'Advanced development', 'INF03', 3),
+('RES03-01 · Réseaux sans fil et Mobiles', 'Wireless and mobile networks', 'RES03', 3),
+('MDI03-01 · Éléments des sciences de données', 'Data science elements', 'MDI03', 3),
+('SCS03-01 · Entrepreneuriat et Finance', 'Entrepreneurship and finance', 'SCS03', 3),
+('LCG03-01 · Techniques de communications', 'Communication techniques', 'LCG03', 3);
+
+-- Modules for Semestre 4
+INSERT INTO modules (name, description, code, year_id) VALUES
+('INF04-01 · Ingénierie des services', 'Service engineering', 'INF04-01', 4),
+('INF04-02 · Big Data and IA', 'Big Data and AI', 'INF04-02', 4),
+('RES04-01 · IoT et Cloud', 'IoT and Cloud', 'RES04-01', 4),
+('RES04-02 · Mobile and Networking', 'Mobile and networking', 'RES04-02', 4),
+('INFSC04-03 · Sécurité', 'Security', 'INFSC04-03', 4),
+('INFSC04-04 · Économie et régulation du Digital', 'Digital economy', 'INFSC04-04', 4),
+('UEC04 · Unités aux choix', 'Elective units', 'UEC04', 4),
+('PRJ04 · Challenge et Projet', 'Challenge and project', 'PRJ04', 4);
+
+-- Subjects for Semestre 1 Modules
+INSERT INTO subjects (name, description, code, module_id) VALUES
+('Circuits et Systèmes Numériques', 'Digital circuits and systems', '10101', 1),
+('Hyperfréquences', 'RF and microwave systems', '10102', 1),
+('Antennes', 'Antenna systems', '10103', 1),
+('Algorithmique et structures de données Avancées', 'Advanced algorithms', '10201', 2),
+('Atelier de programmation C', 'C programming workshop', '10202', 2),
+('Architecture et Système d''exploitation', 'OS architecture', '10203', 2),
+('Introduction aux Technologies du monde digital', 'Digital technologies intro', '10301', 3),
+('Télécommunication', 'Telecommunications', '10302', 3),
+('Réseaux Locaux et IP', 'Local and IP networks', '10303', 3),
+('Mathématiques pour les TIC', 'Math for ICT', '10401', 4),
+('Théorie du signal', 'Signal theory', '10402', 4),
+('Probabilités et processus aléatoires', 'Probabilities', '10403', 4),
+('Management de l''Entreprise', 'Business management', '10501', 5),
+('Droit des Affaires', 'Business law', '10502', 5),
+('Macroéconomie', 'Macroeconomics', '10503', 5),
+('Anglais', 'English', '10601', 6),
+('Français', 'French', '10602', 6),
+('Séminaires d''ouverture (Français)', 'Opening seminars', '10603', 6);
+
+-- Subjects for Semestre 2 Modules
+INSERT INTO subjects (name, description, code, module_id) VALUES
+('Architecture et programmation embarquée', 'Embedded programming', '20101', 7),
+('Théorie de l''information et Codage', 'Information theory', '20102', 7),
+('Projet de conception RF et Electronique', 'RF project', '20103', 7),
+('Conception des bases de données relationnelles', 'Database design', '20201', 8),
+('Programmation Orienté Objet (C++)', 'OOP C++', '20202', 8),
+('Linux et programmation système', 'Linux programming', '20203', 8),
+('Routage et Commutation dans les réseaux', 'Routing and switching', '20301', 9),
+('Pratique réseaux', 'Network practice', '20302', 9),
+('Recherche opérationnelle', 'Operations research', '20401', 10),
+('Optimisation convexe', 'Convex optimization', '20402', 10),
+('Traitement du signal', 'Signal processing', '20403', 10),
+('Management des projets', 'Project management', '20501', 11),
+('Pacte', 'Social pact', '20502', 11),
+('Anglais', 'English', '20601', 12),
+('Français', 'French', '20602', 12),
+('Séminaires d''ouverture (Français)', 'Opening seminars', '20603', 12);
+
+-- Subjects for Semestre 3 Modules
+INSERT INTO subjects (name, description, code, module_id) VALUES
+('Composants et Systèmes optiques', 'Optical systems', '30101', 13),
+('Transmission numérique', 'Digital transmission', '30102', 13),
+('Unified Modeling Language', 'UML', '30201', 14),
+('Technologies (Web et mobile)', 'Web and mobile tech', '30202', 14),
+('Projet Développement (Web et Mobile)', 'Development project', '30203', 14),
+('Propagation multitrajets et diversités', 'Multipath propagation', '30301', 15),
+('Fondements et architectures des réseaux cellulaires', 'Cellular networks', '30302', 15),
+('WLAN & Réseaux IP étendus', 'WLAN and extended IP', '30303', 15),
+('Inférence statistique', 'Statistical inference', '30401', 16),
+('Atelier d''optimisation', 'Optimization workshop', '30402', 16),
+('Ingénierie des données', 'Data engineering', '30403', 16),
+('Comptabilité financière', 'Financial accounting', '30501', 17),
+('Finances d''Entreprise', 'Corporate finance', '30502', 17),
+('Culture Entrepreneuriale', 'Entrepreneurial culture', '30503', 17),
+('Anglais', 'English', '30601', 18),
+('Français', 'French', '30602', 18),
+('Séminaires d''ouverture (Français)', 'Opening seminars', '30603', 18);
+
+-- Subjects for Semestre 4 Modules
+INSERT INTO subjects (name, description, code, module_id) VALUES
+('Introduction à Ingénierie des Services Numériques', 'Digital services intro', '40101', 19),
+('Technologies des services', 'Service technologies', '40102', 19),
+('Fondement de l''IA', 'AI fundamentals', '40201', 20),
+('Big Data', 'Big Data', '40202', 20),
+('IoT devices', 'IoT devices', '40301', 21),
+('Fondement Cloud', 'Cloud fundamentals', '40302', 21),
+('Réseaux Large Bande LTE/LTE-Pro', 'LTE networks', '40401', 22),
+('Evolution et Migration vers la 6G', '6G evolution', '40402', 22),
+('Algorithmes et Protocoles Cryptographiques', 'Cryptography', '40501', 23),
+('Cyber Security Fundamental', 'Cybersecurity', '40502', 23),
+('Plateformes', 'Platforms', '40601', 24),
+('Droit du Numérique', 'Digital law', '40602', 24),
+('Culture générale', 'General culture', '40701', 25),
+('Systèmes et Techniques avancées', 'Advanced systems', '40702', 25),
+('Certifications', 'Certifications', '40703', 25),
+('Digital et Secteurs Economiques', 'Digital economy sectors', '40704', 25),
+('Challenge d''entreprendre', 'Entrepreneurship challenge', '40801', 26),
+('Projet de Préparation Mémoire (P2M)', 'Thesis preparation', '40802', 26);
+
+-- Create admin user
+-- Password is 'admin123' (you should use BCrypt hashing in production)
+INSERT INTO users (username, email, password, first_name, last_name, role, is_active, created_at, updated_at) VALUES
+('admin', 'admin@suplearn.com', '$2a$10$xN9mKQWg8XGhVyGCMt0Qh.E4p5i6EqH7YvKxJH5KjFGlPqRXzH0Ai', 'Admin', 'User', 'ADMIN', true, NOW(), NOW());
+
+-- Create sample professor
+INSERT INTO users (username, email, password, first_name, last_name, role, is_active, created_at, updated_at) VALUES
+('prof.smith', 'smith@suplearn.com', '$2a$10$xN9mKQWg8XGhVyGCMt0Qh.E4p5i6EqH7YvKxJH5KjFGlPqRXzH0Ai', 'John', 'Smith', 'PROFESSOR', true, NOW(), NOW());
+
+-- Create sample student
+INSERT INTO users (username, email, password, first_name, last_name, role, is_active, created_at, updated_at) VALUES
+('student1', 'student1@suplearn.com', '$2a$10$xN9mKQWg8XGhVyGCMt0Qh.E4p5i6EqH7YvKxJH5KjFGlPqRXzH0Ai', 'Alice', 'Johnson', 'STUDENT', true, NOW(), NOW());
+
+-- Insert sample resources (subjects from Semestre 1 and 3)
+INSERT INTO resources (title, description, file_name, file_path, file_type, file_size, type, status, subject_id, uploaded_by, upload_date, view_count, download_count) VALUES
+('Circuits et Systèmes Numériques - Cours', 'Comprehensive course notes', 'circuits_cours.pdf', '/uploads/circuits_cours.pdf', 'application/pdf', 2048576, 'COURSE', 'APPROVED', 1, 2, NOW(), 45, 23),
+('Algorithmique Avancée - TD', 'Practice exercises with solutions', 'algo_td.pdf', '/uploads/algo_td.pdf', 'application/pdf', 1024576, 'COURSEWORK', 'APPROVED', 4, 2, NOW(), 128, 89),
+('UML Project - Example', 'Sample UML project documentation', 'uml_project.zip', '/uploads/uml_project.zip', 'application/zip', 5242880, 'PROJECT', 'APPROVED', 44, 3, NOW(), 67, 34),
+('Transmission Numérique - Examen 2024', 'Previous year exam with solutions', 'transmission_exam.pdf', '/uploads/transmission_exam.pdf', 'application/pdf', 512000, 'EXAM', 'APPROVED', 43, 2, NOW(), 92, 56);
+
+-- Sample quiz
+INSERT INTO quizzes (title, description, google_form_url, subject_id, created_by, created_at, is_active, duration_minutes, passing_score) VALUES
+('Python Basics Quiz', 'Test your knowledge of Python fundamentals', 'https://forms.google.com/sample-python-quiz', 1, 2, NOW(), true, 30, 70);
+
+COMMIT;
+
+-- Verification queries
+SELECT 'Years:' as Table_Name, COUNT(*) as Count FROM years
+UNION ALL
+SELECT 'Modules:', COUNT(*) FROM modules
+UNION ALL
+SELECT 'Subjects:', COUNT(*) FROM subjects
+UNION ALL
+SELECT 'Users:', COUNT(*) FROM users
+UNION ALL
+SELECT 'Resources:', COUNT(*) FROM resources
+UNION ALL
+SELECT 'Quizzes:', COUNT(*) FROM quizzes;

@@ -1,0 +1,40 @@
+<div class="container">
+  <h2>Resource Details</h2>
+  
+  <div *ngIf="resource" class="card">
+    <div class="card-body">
+      <h3 class="card-title">{{ resource.title }}</h3>
+      <div class="mb-3">
+        <span class="badge bg-primary me-2">{{ resource.type }}</span>
+        <span class="badge" [ngClass]="getStatusBadgeClass()">{{ resource.status }}</span>
+      </div>
+      <p class="card-text">{{ resource.description }}</p>
+      
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <strong>File Type:</strong> {{ resource.fileType }}<br>
+          <strong>File Size:</strong> {{ formatFileSize(resource.fileSize) }}<br>
+          <strong>Views:</strong> {{ resource.viewCount }}<br>
+          <strong>Downloads:</strong> {{ resource.downloadCount }}
+        </div>
+        <div class="col-md-6">
+          <strong>Uploaded:</strong> {{ resource.uploadDate | date }}<br>
+          <strong>Status:</strong> {{ resource.status }}
+        </div>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button class="btn btn-primary" (click)="downloadResource()">
+          <i class="bi bi-download"></i> Download
+        </button>
+        <button class="btn btn-outline-secondary" (click)="goBack()">
+          Back to List
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!resource" class="alert alert-info">
+    Loading resource details...
+  </div>
+</div>

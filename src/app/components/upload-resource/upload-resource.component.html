@@ -1,0 +1,105 @@
+<div class="container">
+  <h2>Upload Resource</h2>
+  <p class="text-muted">Share your academic resources with the community. Admin will review before publishing.</p>
+  
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title *</label>
+          <input type="text" class="form-control" id="title" formControlName="title"
+            [class.is-invalid]="submitted && f['title'].errors">
+          <div class="invalid-feedback" *ngIf="submitted && f['title'].errors">
+            Title is required
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description *</label>
+          <textarea class="form-control" id="description" rows="4" formControlName="description"
+            [class.is-invalid]="submitted && f['description'].errors"></textarea>
+          <div class="invalid-feedback" *ngIf="submitted && f['description'].errors">
+            Description is required
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="year" class="form-label">Year *</label>
+            <select class="form-select" id="year" formControlName="year" (change)="onYearChange()"
+              [class.is-invalid]="submitted && f['year'].errors">
+              <option value="">Select Year</option>
+              <option *ngFor="let year of years" [value]="year.id">{{ year.name }}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="submitted && f['year'].errors">
+              Year is required
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="module" class="form-label">Module *</label>
+            <select class="form-select" id="module" formControlName="module" (change)="onModuleChange()"
+              [class.is-invalid]="submitted && f['module'].errors" [disabled]="!modules.length">
+              <option value="">Select Module</option>
+              <option *ngFor="let module of modules" [value]="module.id">{{ module.name }}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="submitted && f['module'].errors">
+              Module is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="subject" class="form-label">Subject *</label>
+            <select class="form-select" id="subject" formControlName="subject"
+              [class.is-invalid]="submitted && f['subject'].errors" [disabled]="!subjects.length">
+              <option value="">Select Subject</option>
+              <option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="submitted && f['subject'].errors">
+              Subject is required
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="type" class="form-label">Resource Type *</label>
+            <select class="form-select" id="type" formControlName="type"
+              [class.is-invalid]="submitted && f['type'].errors">
+              <option value="">Select Type</option>
+              <option value="COURSE">Course Material</option>
+              <option value="EXAM">Old Exam</option>
+              <option value="PROJECT">Project</option>
+              <option value="COURSEWORK">Coursework (TD)</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="submitted && f['type'].errors">
+              Type is required
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="file" class="form-label">File * (PDF, Word, PowerPoint, ZIP, Video)</label>
+          <input type="file" class="form-control" id="file" (change)="onFileSelect($event)"
+            [class.is-invalid]="submitted && !selectedFile">
+          <div class="invalid-feedback" *ngIf="submitted && !selectedFile">
+            File is required
+          </div>
+          <small class="text-muted">Maximum file size: 100MB</small>
+        </div>
+
+        <div class="alert alert-danger" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+        <div class="alert alert-success" *ngIf="successMessage">
+          {{ successMessage }}
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="loading">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+          Upload Resource
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

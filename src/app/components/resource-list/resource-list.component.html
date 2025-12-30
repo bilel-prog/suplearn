@@ -1,0 +1,61 @@
+<div class="container">
+  <h2>Browse Resources</h2>
+  
+  <!-- Filters -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <select class="form-select" [(ngModel)]="selectedYear" (change)="onYearChange()">
+            <option value="">All Years</option>
+            <option *ngFor="let year of years" [value]="year.id">{{ year.name }}</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select" [(ngModel)]="selectedModule" (change)="onModuleChange()" [disabled]="!selectedYear">
+            <option value="">All Modules</option>
+            <option *ngFor="let module of modules" [value]="module.id">{{ module.name }}</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select" [(ngModel)]="selectedSubject" (change)="onSubjectChange()" [disabled]="!selectedModule">
+            <option value="">All Subjects</option>
+            <option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select" [(ngModel)]="selectedType" (change)="onTypeChange()">
+            <option value="">All Types</option>
+            <option value="COURSE">Courses</option>
+            <option value="EXAM">Exams</option>
+            <option value="PROJECT">Projects</option>
+            <option value="COURSEWORK">Coursework</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resources List -->
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let resource of resources">
+      <div class="card resource-card h-100" [class]="resource.type.toLowerCase()">
+        <div class="card-body">
+          <h5 class="card-title">{{ resource.title }}</h5>
+          <p class="card-text">{{ resource.description | slice:0:100 }}{{ resource.description.length > 100 ? '...' : '' }}</p>
+          <div class="mb-2">
+            <span class="badge bg-primary">{{ resource.type }}</span>
+          </div>
+          <div class="text-muted small mb-2">
+            👁️ {{ resource.viewCount }} | ⬇️ {{ resource.downloadCount }}
+          </div>
+          <a [routerLink]="['/resources', resource.id]" class="btn btn-sm btn-primary">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="resources.length === 0" class="alert alert-info">
+    No resources found. Try adjusting your filters.
+  </div>
+</div>
