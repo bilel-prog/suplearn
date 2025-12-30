@@ -37,4 +37,8 @@ export class HomeComponent implements OnInit {
       });
     }
   }
+
+  openGoogleCalendar(): void {
+    window.open('https://calendar.google.com', '_blank');
+  }
 }
